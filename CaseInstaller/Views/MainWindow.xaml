@@ -1,0 +1,36 @@
+﻿<Window x:Class="CaseInstaller.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/" 
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="600" Width="800"  WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+       >
+    <Grid >
+        <Button  Height="18" Width="18" Content="X" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" RenderTransformOrigin="1.033,0.243" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding CloseCommand}" >
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse Fill="White"/>
+                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,10,160,559" Height="31" >
+            <TextBlock ><InlineUIContainer>
+                    <Image Source="C:\Users\amal.babu\Pictures\TruCareTitle.PNG" Width="190"/>
+                </InlineUIContainer></TextBlock>
+        </StackPanel>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" Width="800" Height="559" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <!--<ContentControl prism:RegionManager.RegionName="SidePanelRegion" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="229" Height="559"/>-->
+        <Button Content="Next >" IsEnabled="{Binding CheckedAny}" Visibility="{Binding ButtonVisible}"  Background="#0A4F5B" Foreground="White" Command="{Binding NavigateCommand}" CommandParameter="TrueManagementOptions" Margin="602,550,118,20" />
+        <Button Content="Cancel" Background="#EFEFEF" Visibility="{Binding ButtonVisible}" Command="{Binding CloseCommand}" Margin="690,550,30,20" />
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding WindowLoadCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </Grid>
+</Window>

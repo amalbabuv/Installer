@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="CaseInstaller.Views.TrueManagementInstall"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:CaseInstaller.Views"
+             xmlns:uric="clr-namespace:CaseInstaller.Converters"
+             mc:Ignorable="d" 
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Width="800" Height="560">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <uric:TickOrNot x:Key="UriConverter"></uric:TickOrNot>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="White" Width="800" Height="564">
+
+        <TextBlock FontSize="19" Foreground="#105697" Margin="241,10,147,515" Text="TrueCare Insights V2.15 Installation Assistant" />
+
+        <Grid>
+            <Border BorderBrush="#E2E2E2" Background="#F7F7F7" BorderThickness="2" CornerRadius="2" Margin="241,47,22,74">
+                <Grid Margin="20,18,19,18" Background="#F7F7F7" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,15" FontSize="12" VerticalAlignment="Top" TextWrapping="Wrap" Grid.RowSpan="2" HorizontalAlignment="Left" Width="458"><Run Text="This assistant will guide you through downloading and installing TruCare Insights."/><LineBreak/><Run Text=" "/><LineBreak/><Run Text="Please make sure you stay connected to the Internet during the installation process, as"/><LineBreak/> <Run Text="TruCare Insights components will need to be downloaded. "/><LineBreak/><Run/><LineBreak/><Run Text="Click 'Next' to continue "/><LineBreak/><Run/></TextBlock>
+
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center"  Grid.Column="1" FontSize="16" Foreground="#222222" Text="Install TruCare Insights Version 2.15" />
+
+                    <Grid Grid.Row="0" Grid.Column="0"  Background="#196F7E" VerticalAlignment="Center" HorizontalAlignment="Left" Width="45" Height="45"/>
+
+                </Grid>
+            </Border>
+        </Grid>
+        <Button Content="Next >" Background="#0B4F5C" Foreground="White" Command="{Binding InstallCommand}" CommandParameter="TrueManagementOptions" Margin="605,514,115,20" />
+        <Button Background="#EFEFEF" Content="Cancel" Command="{Binding CloseCommand}" Margin="698,514,22,20" />
+        <!--<Button Content="Previous" Height="20" Width="60" Visibility="{Binding PreviousVisible}" Background="#0B4F5C" Foreground="White" RenderTransformOrigin="1.233,8.35" Margin="500,514,240,26" />-->
+
+        <Grid Background="#0B4F5C" Width="220" Height="560" HorizontalAlignment="Left" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Background="Transparent" Foreground="Black"  HorizontalAlignment="Center" VerticalAlignment="Top"  Height="71" Width="195" Margin="14,0,20,0" >
+                <InlineUIContainer>
+                    <Image Source="C:\Users\amal.babu\Pictures\TruCareLogo.PNG" Stretch="UniformToFill" Height="53" Width="190" />
+                </InlineUIContainer>
+            </TextBlock>
+            <TextBlock Grid.Row="10" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="ⓒ2020 Casenet LLC-All Rights Reserved" Foreground="#C6C6C6" FontSize="10" Margin="20,0,10,0" Height="16" Width="190"/>
+            <TextBlock Grid.Row="1" Background="Transparent" Text="Installation Steps" FontSize="16" Margin="25,25,30,0" Foreground="White"/>
+
+            <ItemsControl Grid.Row="2" Grid.RowSpan="4" ItemsSource="{Binding ProcessList}" FontSize="11" Background="Transparent" Foreground="White" Height="204" VerticalAlignment="Bottom">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label  Foreground="#0B4F5C" Grid.Column="1" Background="#0B4F5C" Grid.ColumnSpan="1" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center">
+                                <Image Source="{Binding Progresses,Converter={StaticResource UriConverter}}" Stretch="UniformToFill"/>
+                            </Label>
+                            <Label Foreground="White" Grid.Column="2" Grid.ColumnSpan="6" Content="{Binding Process}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding WindowLoadCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </Grid>
+
+</UserControl>
